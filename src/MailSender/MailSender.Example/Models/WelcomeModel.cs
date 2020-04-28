@@ -6,7 +6,7 @@ namespace MailSender.Example.Models
     public class WelcomeModel : BaseModel
     {
         public string Title { get; set; }
-        public string Name { get; set; }
+        public string Body { get; set; }
         public string WWWRootPath { get; set; }
 
         public override string ToBase64(string path)

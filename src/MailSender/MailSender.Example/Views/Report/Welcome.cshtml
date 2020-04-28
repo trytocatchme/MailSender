@@ -1,7 +1,6 @@
 ﻿@model MailSender.Example.Models.WelcomeModel
 
-<h1>Welcome @Model.Name</h1>
+<h1>@Model.Title</h1>
+<p>Model.Body</p>
 
-<p> title: @Model.Title</p>
-
-<img src="@Model.ToBase64(@"\assets\logo.jpg")" />
+<img height="50" src="@Model.ToBase64(@"\assets\logo.jpg")" />
