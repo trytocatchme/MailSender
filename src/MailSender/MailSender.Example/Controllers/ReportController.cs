@@ -3,8 +3,6 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using MailSender.Core;
 using MailSender.Core.Models;
-using MailSender.Core.RenderingProviders;
-using MailSender.Core.ViewPickers;
 using MailSender.Example.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +13,8 @@ namespace MailSender.Example.Controllers
 {
     public class ReportController : Controller
     {
-        private readonly IRazorViewEngine _razorViewEngine;
-        private readonly ITempDataProvider _tempDataProvider;
-        private readonly IServiceProvider _serviceProvider;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly SmtpConfiguration _smtpConfiguration;
         private readonly MailSenderClient _mailSenderClient;
-
 
         public ReportController(IRazorViewEngine razorViewEngine,
             ITempDataProvider tempDataProvider,
@@ -29,14 +22,8 @@ namespace MailSender.Example.Controllers
             IWebHostEnvironment webHostEnvironment,
             SmtpConfiguration smtpConfiguration)
         {
-            _razorViewEngine = razorViewEngine;
-            _tempDataProvider = tempDataProvider;
-            _serviceProvider = serviceProvider;
             _webHostEnvironment = webHostEnvironment;
-            _smtpConfiguration = smtpConfiguration;
-
             _mailSenderClient = new MailSenderClient(razorViewEngine, tempDataProvider, serviceProvider, smtpConfiguration);
-
         }
 
         public async Task<IActionResult> Index()
@@ -57,9 +44,6 @@ namespace MailSender.Example.Controllers
 
             await _mailSenderClient.SendAsync(mailModel);
 
-          
-
-           
             return View("Welcome", dataModel);
         }
     }
