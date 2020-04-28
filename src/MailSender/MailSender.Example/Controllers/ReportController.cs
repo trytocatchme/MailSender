@@ -1,13 +1,10 @@
-﻿using System;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading.Tasks;
 using MailSender.Core;
 using MailSender.Core.Models;
 using MailSender.Example.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MailSender.Example.Controllers
 {
@@ -16,27 +13,25 @@ namespace MailSender.Example.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly MailSenderClient _mailSenderClient;
 
-        public ReportController(IRazorViewEngine razorViewEngine,
-            ITempDataProvider tempDataProvider,
-            IServiceProvider serviceProvider,
-            IWebHostEnvironment webHostEnvironment,
-            SmtpConfiguration smtpConfiguration)
+        public ReportController(IWebHostEnvironment webHostEnvironment, MailSenderClient mailSenderClient)
         {
             _webHostEnvironment = webHostEnvironment;
-            _mailSenderClient = new MailSenderClient(razorViewEngine, tempDataProvider, serviceProvider, smtpConfiguration);
+            _mailSenderClient = mailSenderClient;
         }
 
         public async Task<IActionResult> Index()
         {
-            MailMessage mailMessage = new MailMessage("Papercut@user.com", "Papercut@user.com")
+            MailMessage mailMessage = new MailMessage("sender@user.com", "receiver@user.com")
             {
-                IsBodyHtml = true
+                IsBodyHtml = true,
+                Subject = "Email subject"
             };
+
 
             var dataModel = new WelcomeModel()
             {
-                Name = "Artur",
-                Title = "Tytul",
+                Name = "test name",
+                Title = "test title",
                 WWWRootPath = _webHostEnvironment.WebRootPath
             };
 

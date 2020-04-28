@@ -38,6 +38,13 @@ namespace MailSender.Core
         private readonly IRenderingProvider _renderingProvider;
         private readonly IMailClient _mailClient;
 
+        public MailSenderClient(IViewPicker viewPicker, IRenderingProvider renderingProvider, IMailClient mailClient)
+        {
+            _renderingProvider = renderingProvider ?? throw new ArgumentNullException(nameof(renderingProvider));
+            _viewPicker = viewPicker ?? throw new ArgumentNullException(nameof(viewPicker));
+            _mailClient = mailClient ?? throw new ArgumentNullException(nameof(mailClient));
+        }
+
         public MailSenderClient(IRazorViewEngine razorViewEngine,
             ITempDataProvider tempDataProvider,
             IServiceProvider serviceProvider,
@@ -60,20 +67,16 @@ namespace MailSender.Core
             _mailClient = new MailClient(smtpConfiguration);
         }
 
-        public MailSenderClient(IViewPicker viewPicker, IRenderingProvider renderingProvider, IMailClient mailClient)
-        {
-            _renderingProvider = renderingProvider ?? throw new ArgumentNullException(nameof(renderingProvider));
-            _viewPicker = viewPicker ?? throw new ArgumentNullException(nameof(viewPicker));
-            _mailClient = mailClient ?? throw new ArgumentNullException(nameof(mailClient));
-        }
-
         public virtual async Task SendAsync(MailModel mailModel)
         {
             if (mailModel == null)
                 throw new ArgumentNullException(nameof(mailModel));
 
             var view = _viewPicker.GetView(mailModel.ViewName);
-            mailModel.MailMessage.Body = await _renderingProvider.RenderAsync(view, mailModel.BaseModel);
+
+            if (string.IsNullOrEmpty(mailModel.MailMessage.Body))
+                mailModel.MailMessage.Body = await _renderingProvider.RenderAsync(view, mailModel.BaseModel);
+
             await _mailClient.SendEmailAsync(mailModel.MailMessage);
         }
 
