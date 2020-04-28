@@ -27,9 +27,9 @@ namespace MailSender.Core.Models
 {
     public class MailModel
     {
-        public MailMessage MailMessage { get; private set; }
-        public BaseModel BaseModel { get; private set; }
-        public string ViewName { get; private set; }
+        public MailMessage MailMessage { get; set; }
+        public BaseModel BaseModel { get; set; }
+        public string ViewName { get; set; }
 
         public MailModel(MailMessage mailMessage, BaseModel baseModel, string viewName)
         {

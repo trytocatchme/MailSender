@@ -62,18 +62,9 @@ namespace MailSender.Core
 
         public MailSenderClient(IViewPicker viewPicker, IRenderingProvider renderingProvider, IMailClient mailClient)
         {
-            if (viewPicker == null)
-                throw new ArgumentNullException(nameof(viewPicker));
-
-            if (renderingProvider == null)
-                throw new ArgumentNullException(nameof(renderingProvider));
-
-            if (mailClient == null)
-                throw new ArgumentNullException(nameof(mailClient));
-
-            _viewPicker = viewPicker;
-            _renderingProvider = renderingProvider;
-            _mailClient = mailClient;
+            _renderingProvider = renderingProvider ?? throw new ArgumentNullException(nameof(renderingProvider));
+            _viewPicker = viewPicker ?? throw new ArgumentNullException(nameof(viewPicker));
+            _mailClient = mailClient ?? throw new ArgumentNullException(nameof(mailClient));
         }
 
         public virtual async Task SendAsync(MailModel mailModel)
@@ -84,6 +75,11 @@ namespace MailSender.Core
             var view = _viewPicker.GetView(mailModel.ViewName);
             mailModel.MailMessage.Body = await _renderingProvider.RenderAsync(view, mailModel.BaseModel);
             await _mailClient.SendEmailAsync(mailModel.MailMessage);
+        }
+
+        public virtual async Task SendAsync(string from, string to, string subject, string body)
+        {
+            await _mailClient.SendEmailAsync(from, to, subject, body);
         }
     }
 }
