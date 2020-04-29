@@ -37,6 +37,7 @@ services.AddScoped<MailSenderClient>();
 4. If you configured everything corectly you should see output from the action in your browser and also receive an email.
 <br />
 -Test links: https://localhost:44337/report/welcome or https://localhost:44337/report/Complex
+<br />
 *(Probably port on your machine will be different. Remember also to setup MailSender.Example as a startup project).
 
 
