@@ -20,7 +20,7 @@ namespace MailSender.Example
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(Configuration);
-            services.AddSingleton((x) =>
+            services.AddSingleton(x =>
             {
                 var smtpConfiguration = new SmtpConfiguration();
                 Configuration.GetSection("Smtp").Bind(smtpConfiguration);
