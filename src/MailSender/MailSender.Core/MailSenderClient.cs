@@ -63,7 +63,7 @@ namespace MailSender.Core
                 throw new ArgumentNullException(nameof(smtpConfiguration));
 
             _viewPicker = new StandardViewPicker(razorViewEngine, serviceProvider);
-            _renderingProvider = new RazorRender(tempDataProvider, serviceProvider);
+            _renderingProvider = new RazorRenderer(tempDataProvider, serviceProvider);
             _mailClient = new MailClient(smtpConfiguration);
         }
 

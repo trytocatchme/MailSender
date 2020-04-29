@@ -35,12 +35,12 @@ using System.Threading.Tasks;
 
 namespace MailSender.Core.RenderingProviders
 {
-    public class RazorRender : IRenderingProvider
+    public class RazorRenderer : IRenderingProvider
     {
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
      
-        public RazorRender(ITempDataProvider tempDataProvider, IServiceProvider serviceProvider)
+        public RazorRenderer(ITempDataProvider tempDataProvider, IServiceProvider serviceProvider)
         {
             if (tempDataProvider == null)
                 throw new ArgumentNullException(nameof(tempDataProvider));
