@@ -35,6 +35,7 @@ services.AddScoped<MailSenderClient>();
 2. Put Smtp server configuration to <b>appsettings.json</b>
 3. Example of implementation you can find in <b>MailSender.Example</b> project in <b>ReportController.cs</b>
 4. If you configured everything corectly you should see output from the action in your browser and also receive an email.
+<br />
 -Test links: https://localhost:44337/report/welcome or https://localhost:44337/report/Complex
 *(Probably port on your machine will be different. Remember also to setup MailSender.Example as a startup project).
 
