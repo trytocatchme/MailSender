@@ -8,6 +8,7 @@ MailSender is a pure .net core library written in C#. Used for sending complex e
 <br />
 
 **How to use**
+<br />
 Example of implementation you can find in <b>MailSender.Example</b> project in <b>ReportController.cs</b>
 
 1. Download MailSender from nuget: https://www.nuget.org/packages/MailSender.NetCore/
@@ -29,7 +30,7 @@ services.AddSingleton((x) =>
     return smtpConfiguration;
 });
 services.AddScoped<MailSenderClient>();
-
+```
 4. Start local Smtp server (it's not a part of this library) for example this one: https://github.com/ChangemakerStudios/Papercut-SMTP
 5. Put Smtp server configuration to <b>appsettings.json</b> 
 
