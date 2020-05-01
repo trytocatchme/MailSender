@@ -9,13 +9,15 @@ MailSender is a pure .net core library written in C#. Used for sending complex e
 
 **How to use**
 <br />
-Example of implementation you can find in <b>MailSender.Example</b> project in <b>ReportController.cs</b>
-
-1. Download MailSender from nuget: https://www.nuget.org/packages/MailSender.NetCore/
-2. Add Smtp configuration to <b>appsettings.json</b>
 ```
+!Example of implementation you can find in <b>MailSender.Example</b> project in <b>ReportController.cs</b>
+```
+1. Download MailSender from nuget: https://www.nuget.org/packages/MailSender.NetCore/
+2. Add Smtp configuration template to <b>appsettings.json</b>
+```
+-Your configuration  could be different!
 "SMTP": {
-  "Host": "",
+  "Host": "127.0.0.1",
   "Port": 25,
   "Username": "",
   "Password": ""
@@ -31,19 +33,11 @@ services.AddSingleton((x) =>
 });
 services.AddScoped<MailSenderClient>();
 ```
-4. Start local Smtp server (it's not a part of this library) for example this one: https://github.com/ChangemakerStudios/Papercut-SMTP
-5. Put Smtp server configuration to <b>appsettings.json</b> 
-
+4. Start local Smtp server (it's not a part of this library) 
 ```
-Example configuration:
-"SMTP": {
-  "Host": "127.0.0.1",
-  "Port": 25,
-  "Username": "",
-  "Password": ""
-},
+#For example this one: https://github.com/ChangemakerStudios/Papercut-SMTP
 ```
-6. Create ReportController in ASP.NET Core application and add below code:
+5. Create ReportController in ASP.NET Core application and add below code:
 ```
    public class ReportController : Controller// you can name it as you want
     {
@@ -58,15 +52,15 @@ Example configuration:
         
         ...
 ```
-7. Create WelcomeModel. It will be used for passing data to razor view.
+6. Create WelcomeModel. It will be used for passing data to razor view.
 ```
     public class WelcomeModel : BaseModel
     {
         public string Title { get; set; }
         public string Body { get; set; }
         public string WWWRootPath { get; set; }
-
-        public override string ToBase64(string path)// it's helper method that we will use for transforming images to base64 format
++it's helper method that we will use for transforming images to base64 format
+        public override string ToBase64(string path) 
         {
             if (string.IsNullOrEmpty(WWWRootPath))
                 throw new ArgumentNullException(nameof(WWWRootPath));
@@ -75,8 +69,8 @@ Example configuration:
         }
     }
 ```
-8. In ASP.NET core application add logo.jpg(pick random image from internet) to wwwroot\assets\logo.jpg
-9. Create view called Welcome.cshtml (Views/Report/Welcome.cshtml) and paste below code:
+7. In ASP.NET core application add logo.jpg(pick random image from internet) to wwwroot\assets\logo.jpg
+8. Create view called Welcome.cshtml (Views/Report/Welcome.cshtml) and paste below code:
 ```
 @model MailSender.Example.Models.WelcomeModel
 
@@ -85,7 +79,7 @@ Example configuration:
 
 <img height="50" src="@Model.ToBase64(@"\assets\logo.jpg")" />
 ```
-10. In the controller that you created previousrly past this code:
+9. In the controller that you created previously paste this code:
 ```
    public async Task<IActionResult> Welcome()
         {
@@ -108,7 +102,7 @@ Example configuration:
             return View(dataModel);
         }
 ```
-11. If you configured everything corectly you should see output from the action in your browser and also receive an email.
+10. If you configured everything correctly, you should see output from the action in your browser and also receive an email.
 <br />
 -Test links: https://localhost:44337/report/welcome or https://localhost:44337/report/Complex
 <br />
