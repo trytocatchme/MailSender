@@ -1,11 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>trytocatchme</Authors>
+    <PackageId>MailSender.NetCore</PackageId>
+    <PackageTags>smtp .net core mail sender razor</PackageTags>
+    <RepositoryUrl>https://github.com/trytocatchme/MailSender</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="vxs45dyg.3p3~" />
+    <None Include="..\..\..\..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
