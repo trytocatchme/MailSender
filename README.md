@@ -8,7 +8,7 @@ MailSender is a pure .net core library written in C#. Used for sending complex e
 <br />
 **Installation**
 
-1. Download MailSender from nuget: link
+1. Download MailSender from nuget: https://www.nuget.org/packages/MailSender.NetCore/
 2. Add Smtp configuration to <b>appsettings.json</b>
 ```
 "SMTP": {
