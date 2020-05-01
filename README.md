@@ -10,12 +10,12 @@ MailSender is a pure .net core library written in C#. Used for sending complex e
 **How to use**
 <br />
 ```diff
-!Example of implementation you can find in <b>MailSender.Example</b> project in <b>ReportController.cs</b>
+!Example of implementation you can find in MailSender.Example project in ReportController.cs class/controller
 ```
 1. Download MailSender from nuget: https://www.nuget.org/packages/MailSender.NetCore/
 2. Add Smtp configuration template to <b>appsettings.json</b>
-```
--Your configuration  could be different!
+```diff
+-Your configuration could be different!
 "SMTP": {
   "Host": "127.0.0.1",
   "Port": 25,
@@ -104,10 +104,8 @@ services.AddScoped<MailSenderClient>();
 ```
 10. If you configured everything correctly, you should see output from the action in your browser and also receive an email.
 <br />
+
 ```diff
 -Test links: https://localhost:44337/report/welcome or https://localhost:44337/report/Complex
-<br />
 -(Probably port on your machine will be different. Remember also to setup MailSender.Example as a startup project).
 ```
-
-
